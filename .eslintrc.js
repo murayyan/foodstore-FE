@@ -14,5 +14,6 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["react"],
+  ignorePatterns: ["*.css"],
   rules: {},
 };
