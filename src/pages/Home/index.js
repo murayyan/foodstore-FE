@@ -8,14 +8,11 @@ const Home = () => {
       <LayoutSidebar
         sidebar={<SideNav items={menus} verticalAlign="top" />}
         content={
-          <div
-            className="md:flex md:flex-row-reverse w-full mr-5 h-full min-h-
-            screen"
-          >
-            <div className="w-full md:w-3/4 pl-5 pb-10">
+          <div className="w-full h-full mr-5 md:flex md:flex-row-reverse min-h- screen">
+            <div className="w-full pb-10 pl-5 md:w-3/4">
               Konten utama di sini
             </div>
-            <div className="w-full md:w-1/4 h-full shadow-lg border-r border-white bg-gray-100">
+            <div className="w-full h-full bg-gray-100 border-r border-white shadow-lg md:w-1/4">
               Keranjang belanja di sini
             </div>
           </div>

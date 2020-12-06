@@ -15,4 +15,4 @@ const userLogout = () => {
   };
 };
 
-export default { userLogin, userLogout };
+export { userLogin, userLogout };
