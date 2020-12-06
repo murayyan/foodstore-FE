@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { rules } from "./validation";
 import { useHistory, Link } from "react-router-dom";
 import { registerUser } from "../../api/auth";
+import StoreLogo from "../../components/StoreLogo";
 
 const statuslist = {
   idle: "idle",
@@ -55,6 +56,9 @@ const Register = () => {
   return (
     <LayoutOne size="small">
       <Card color="white">
+        <div className="mb-5 text-center">
+          <StoreLogo />
+        </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormControl errorMessage={errors.full_name?.message}>
             <InputText
