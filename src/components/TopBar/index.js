@@ -13,8 +13,8 @@ export default function TopBar() {
         <StoreLogo />
       </div>
       <div className="mr-5 text-right">
-        <Link to={auth?.user ? "/account" : "/login"}>
-          <div clasName="mr-2 inline-block text-red-600 font-bold">
+        <Link to={auth.user ? "/account" : "/login"}>
+          <div className="inline-block mr-2 font-bold text-red-600">
             {auth?.user?.full_name}
           </div>
           <ButtonCircle icon={<FaUser />} />
