@@ -9,6 +9,7 @@ import { listen } from "./app/listener";
 import Register from "./pages/Register";
 import RegisterSuccess from "./pages/RegisterSuccess";
 import Login from "./pages/Login";
+import UserAddressAdd from "./pages/UserAddressAdd";
 import { getCart } from "./api/cart";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/register/success" component={RegisterSuccess} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
+          <Route path="/alamat-pengiriman/tambah" component={UserAddressAdd} />
           <Route path="/" component={Home} />
         </Switch>
       </Router>

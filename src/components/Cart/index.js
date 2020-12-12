@@ -1,11 +1,14 @@
 import * as React from "react";
 import { arrayOf, string, shape, oneOfType, number, func } from "prop-types";
-import { CardItem, Button } from "upkit";
+import { CardItem, Button, Text } from "upkit";
 import { config } from "../../config";
 import FaArrowRight from "@meronex/icons/fa/FaArrowRight";
 import FaCartPlus from "@meronex/icons/fa/FaCartPlus";
+import { sumPrice } from "../../utils/sum-price";
+import { formatCurrency } from "../../utils/format-currency";
 
 const Cart = ({ items, onItemInc, onItemDec, onCheckout }) => {
+  let total = sumPrice(items);
   return (
     <div>
       <div className="px-2 pb-5 mt-5 border-b">
@@ -13,6 +16,7 @@ const Cart = ({ items, onItemInc, onItemDec, onCheckout }) => {
           <FaCartPlus />
           <div className="ml-2">Keranjang</div>
         </div>
+        <Text as="h5"> Total: {formatCurrency(total)} </Text>
         <Button
           text="Checkout"
           fitContainer
@@ -56,7 +60,7 @@ Cart.propTypes = {
       qty: oneOfType([string, number]).isRequired,
     })
   ),
-  onItemInc: func, // (1)
+  onItemInc: func,
   onItemDec: func,
   onCheckout: func,
 };
