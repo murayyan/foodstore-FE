@@ -23,7 +23,7 @@ import {
 } from "../../features/Products/actions";
 import BounceLoader from "react-spinners/BounceLoader";
 import { tags } from "./tags";
-import { addItem, clearItems } from "../../features/Cart/actions";
+import { addItem, removeItem } from "../../features/Cart/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
@@ -121,7 +121,7 @@ const Home = () => {
               <Cart
                 items={cart}
                 onItemInc={(item) => dispatch(addItem(item))}
-                onItemDec={(item) => dispatch(clearItems(item))}
+                onItemDec={(item) => dispatch(removeItem(item))}
                 onCheckout={() => history.push("/checkout")}
               />
             </div>

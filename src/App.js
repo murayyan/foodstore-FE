@@ -13,6 +13,7 @@ import UserAddressAdd from "./pages/UserAddressAdd";
 import UserAddress from "./pages/UserAddress";
 import { getCart } from "./api/cart";
 import Checkout from "./pages/Checkout";
+import Invoice from "./pages/Invoice";
 
 function App() {
   React.useEffect(() => {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/alamat-pengiriman/tambah" component={UserAddressAdd} />
           <Route path="/alamat-pengiriman" component={UserAddress} />
           <Route path="/checkout" component={Checkout} />
+          <Route path="/invoice/:order_id" component={Invoice} />
           <Route path="/" component={Home} />
         </Switch>
       </Router>

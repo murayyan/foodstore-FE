@@ -4,15 +4,17 @@ import TopBar from "../../components/TopBar";
 import FaCartPlus from "@meronex/icons/fa/FaCartPlus";
 import FaAddressCard from "@meronex/icons/fa/FaAddressCard";
 import FaInfoCircle from "@meronex/icons/fa/FaInfoCircle";
-import { useSelector } from "react-redux";
 import { config } from "../../config";
 import { formatCurrency } from "../../utils/format-currency";
 import { sumPrice } from "../../utils/sum-price";
 import FaArrowRight from "@meronex/icons/fa/FaArrowRight";
 import { useAddressData } from "../../hooks/address";
-import { Link } from "react-router-dom";
 import FaArrowLeft from "@meronex/icons/fa/FaArrowLeft";
 import FaRegCheckCircle from "@meronex/icons/fa/FaRegCheckCircle";
+import { createOrder } from "../../api/order";
+import { Link, useHistory, Redirect } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { clearItems } from "../../features/Cart/actions";
 
 const IconWrapper = () => {
   return <div className="flex justify-center text-3xl"></div>;
@@ -83,8 +85,7 @@ const columns = [
 const address = (addr) => {
   return (
     <div>
-      {" "}
-      {addr.name} <br />{" "}
+      {addr.name} <br />
       <small>
         {addr.province}, {addr.regency}, {addr.district}, {addr.village} <br />
         {addr.detail}
@@ -105,6 +106,25 @@ const Checkout = () => {
   let cart = useSelector((state) => state.cart);
   let [selectedAddress, setSelectedAddress] = React.useState(null);
   let { data, status, limit, page, count, setPage } = useAddressData();
+  let dispatch = useDispatch();
+  let history = useHistory();
+  const handleCreateOrder = async () => {
+    let payload = {
+      delivery_fee: config.global_ongkir,
+      delivery_address: selectedAddress._id,
+    };
+    // (1) kirimkan `payload` ke Web API untuk membuat order baru
+    let { data } = await createOrder(payload);
+
+    console.log(data);
+    if (data?.error) return;
+    history.push(`/invoice/${data._id}`);
+
+    dispatch(clearItems());
+  };
+  if (!cart.length) {
+    return <Redirect to="/" />;
+  }
   return (
     <LayoutOne>
       <TopBar />
@@ -239,6 +259,7 @@ const Checkout = () => {
             </div>
             <div className="text-right">
               <Button
+                onClick={handleCreateOrder}
                 color="red"
                 size="large"
                 iconBefore={<FaRegCheckCircle />}
