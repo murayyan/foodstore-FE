@@ -11,6 +11,7 @@ import {
 import { config } from "../../config";
 import menus from "./menus";
 import TopBar from "../../components/TopBar";
+import Cart from "../../components/Cart";
 import {
   fetchProducts,
   setPage,
@@ -22,12 +23,13 @@ import {
 } from "../../features/Products/actions";
 import BounceLoader from "react-spinners/BounceLoader";
 import { tags } from "./tags";
-
+import { addItem, removeItem } from "../../features/Cart/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
   let dispatch = useDispatch();
   let products = useSelector((state) => state.products);
+  let cart = useSelector((state) => state.cart);
 
   React.useEffect(() => {
     dispatch(fetchProducts());
@@ -96,7 +98,7 @@ const Home = () => {
                         title={product.name}
                         imgUrl={`${config.api_host}/upload/${product.image_url}`}
                         price={product.price}
-                        // onAddToCart={(_) => null}
+                        onAddToCart={() => dispatch(addItem(product))}
                       />
                     </div>
                   );
@@ -114,7 +116,11 @@ const Home = () => {
               </div>
             </div>
             <div className="w-full h-full bg-gray-100 border-r border-white shadow-lg md:w-1/4">
-              Keranjang belanja di sini
+              <Cart
+                items={cart}
+                onItemInc={(item) => dispatch(addItem(item))}
+                onItemDec={(item) => dispatch(removeItem(item))}
+              />
             </div>
           </div>
         }

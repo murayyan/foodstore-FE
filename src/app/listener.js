@@ -1,19 +1,28 @@
 import store from "./store";
+import { saveCart } from "../api/cart";
 
 let currentAuth;
+let currentCart;
+
 const listener = () => {
-  // (1) buat variabel previousAuth dan berikan currentAuth sebagai nilai
   let previousAuth = currentAuth;
-  // (2) update nilai currentAuth dari nilai state terbaru
+  let previousCart = currentCart;
   currentAuth = store.getState().auth;
-  // (3) cek apakah nilai state `auth` berubah dari nilai sebelumnya
+  currentCart = store.getState().cart;
+  let { token } = currentAuth;
   if (currentAuth !== previousAuth) {
-    // (4) jika berubah simpan ke localStorage
     localStorage.setItem("auth", JSON.stringify(currentAuth));
+    // (1) saveCart saat `auth` berubah
+    saveCart(token, currentCart);
+  }
+  if (currentCart !== previousCart) {
+    localStorage.setItem("cart", JSON.stringify(currentCart));
+    // (2) saveCart saat `cart` berubah
+    saveCart(token, currentCart);
   }
 };
 const listen = () => {
-  // (1) dengarkan perubahan store
   store.subscribe(listener);
 };
+
 export { listen };
