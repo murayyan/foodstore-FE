@@ -25,11 +25,13 @@ import BounceLoader from "react-spinners/BounceLoader";
 import { tags } from "./tags";
 import { addItem, removeItem } from "../../features/Cart/actions";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const Home = () => {
   let dispatch = useDispatch();
   let products = useSelector((state) => state.products);
   let cart = useSelector((state) => state.cart);
+  let history = useHistory();
 
   React.useEffect(() => {
     dispatch(fetchProducts());
@@ -120,6 +122,7 @@ const Home = () => {
                 items={cart}
                 onItemInc={(item) => dispatch(addItem(item))}
                 onItemDec={(item) => dispatch(removeItem(item))}
+                onCheckout={() => history.push("/checkout")}
               />
             </div>
           </div>
