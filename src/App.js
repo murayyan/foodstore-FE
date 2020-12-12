@@ -12,6 +12,7 @@ import Login from "./pages/Login";
 import UserAddressAdd from "./pages/UserAddressAdd";
 import UserAddress from "./pages/UserAddress";
 import { getCart } from "./api/cart";
+import Checkout from "./pages/Checkout";
 
 function App() {
   React.useEffect(() => {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/alamat-pengiriman/tambah" component={UserAddressAdd} />
           <Route path="/alamat-pengiriman" component={UserAddress} />
+          <Route path="/checkout" component={Checkout} />
           <Route path="/" component={Home} />
         </Switch>
       </Router>
