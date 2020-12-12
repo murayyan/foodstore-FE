@@ -45,7 +45,7 @@ export const fetchProducts = () => {
 
     const params = {
       limit: perPage,
-      skip: currentPage * perPage - perPage,
+      skip: keyword ? 0 : currentPage * perPage - perPage,
       q: keyword,
       tags,
       category,
